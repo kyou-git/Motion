@@ -37,6 +37,11 @@ while True:
         filename = f"motion_{timestamp}.jpg"
         cv2.imwrite(filename, frame1)
 
+        #画像をサーバへ送信する
+        with open(filename, 'rb') as f:
+            res = requests.post("", files={'file':f})
+            print(res.status_code, res.text)
+
     frame1 = frame2
     ret, frame2 = cap.read()
     if not ret:
